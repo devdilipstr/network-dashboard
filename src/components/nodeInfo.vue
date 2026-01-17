@@ -1,13 +1,13 @@
 <template>
-    <div class="d-flex flex-column info">
-        <div class="d-flex flex-row align-items-center justify-content-between pb-2">
+    <div class="d-flex flex-column info gap-1">
+        <div class="d-flex flex-row align-items-center justify-content-between">
             <div class="form-check form-switch" v-if="!viewonly">
                     <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault"  v-model="pingSwitch" @change="pingSwitchChanged">
-                    <label class="form-check-label" for="flexSwitchCheckDefault">Auto Ping</label>
+                    <label class="form-check-label text-uppercase fs-6" for="flexSwitchCheckDefault">Auto Ping</label>
                 </div>
-            <div class="d-flex justify-content-between">
-                <p class="input-group-text align-self-center m-0" style="cursor: pointer;" title="Node id: click to copy" @click="copyNodeId(nodeId)">{{ nodeId }}</p>
-                <button class="btn btn-close align-self-center mx-2" @click="closeinfo"></button>
+            <div class="d-flex justify-content-between gap-2">
+                <p class="input-group-text align-self-center m-0 p-1" style="cursor: pointer;" title="Node id: click to copy" @click="copyNodeId(nodeId)">{{ nodeId }}</p>
+                <button class="btn btn-close align-self-center" @click="closeinfo"></button>
                  <!-- <button class="btn btn-primary btn-sm m-1" @click="ping">Ping</button> -->  
             </div>
         </div>
@@ -37,25 +37,26 @@
             </select>
 
         </div>
-        <div v-if="!viewonly" class="d-flex input-group">
-            <div class="d-flex w-50">
-            <span class="input-group-text" id="basic-addon1">Target</span>
-            <input type="text" class="form-control" placeholder="Enter Target Node Id" aria-label="ip"
-                aria-describedby="basic-addon1" ref="target_id"></div>
+        <div v-if="!viewonly" class="d-flex gap-1">
+            <div class="input-group w-50">
+                <span class="input-group-text" id="basic-addon1">Target</span>
+                <input type="text" class="form-control" placeholder="Enter Target Node Id" aria-label="ip"
+                    aria-describedby="basic-addon1" ref="target_id">
+            </div>
             <div class="input-group w-50">
                 <select class="form-select" ref="connTypeRef">
-                <option selected>Select Connection Type</option>
-                <option value="1">ofc single fiber mode - module</option>
-                <option value="2">ofc single fiber mode - media convertor</option>
-                <option value="3">ofc multi mode mode - module</option>
-                <option value="4">ofc multi mode mode - media convertor</option>
-                <option value="5">utp</option>
-                <option value="6">wireless ap</option>
+                    <option selected>Select Connection Type</option>
+                    <option value="1">ofc single fiber mode - module</option>
+                    <option value="2">ofc single fiber mode - media convertor</option>
+                    <option value="3">ofc multi mode mode - module</option>
+                    <option value="4">ofc multi mode mode - media convertor</option>
+                    <option value="5">utp</option>
+                    <option value="6">wireless ap</option>
                 </select>
-            <button class="btn btn-light btn-sm" @click="addTarget" title="Add Target Connection">Add</button>
+                 <button class="btn btn-light btn-sm" @click="addTarget" title="Add Target Connection">Add</button>
             </div>
         </div>
-        <div class="div mt-2" v-if="connlist">
+        <div class="div" v-if="connlist">
             <div class="d-flex align-items-center justify-content-between" v-for="(conn, id) in connlist"
                 v-bind:key="id">
                 <span class="input-group-text w-100" id="basic-addon1" ref="">{{ id }}</span>
@@ -66,9 +67,9 @@
                 <button v-if="!p.viewonly" class="btn btn-close btn-sm p-3" @click="deleteConn(id)"></button>
             </div>
         </div>
-        <div v-if="!p.viewonly" class="d-flex justify-content-between">
-            <button class="g-1 btn btn-primary justify-content-center m-1 w-50" @click="updateNode">Update</button>
-            <button class="btn btn-danger justify-content-center m-1 w-50" @click="deleteNode">Delete</button>
+        <div v-if="!p.viewonly" class="d-flex justify-content-between gap-1">
+            <button class="g-1 btn btn-primary justify-content-center w-50" @click="updateNode">Update</button>
+            <button class="btn btn-danger justify-content-center w-50" @click="deleteNode">Delete</button>
         </div>
     </div>
 </template>
