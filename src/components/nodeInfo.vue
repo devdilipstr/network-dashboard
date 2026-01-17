@@ -77,7 +77,6 @@
 <script setup>
 import { defineProps, defineEmits, ref, onBeforeMount, watch } from 'vue'
 import useLocalStorage from './useLocalStorage'
-import { emit } from '@/smtpTransporter'
 
 const p = defineProps(["data", "topology", "nodeId","connections","autoping","pingData","viewonly"])
 const nameref = ref()

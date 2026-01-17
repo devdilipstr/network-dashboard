@@ -28,6 +28,7 @@ module.exports = {
   pluginOptions: {
     publicPath: './',
     electronBuilder: {
+      mainProcessFile: 'electron/background.js',
       builderOptions: {
         appId: "com.devd.networkdashboard",
         productName: "Network Dashboard",
