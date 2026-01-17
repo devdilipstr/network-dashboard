@@ -4,6 +4,7 @@ node_modules
 
 
 # local env files
+.env
 .env.local
 .env.*.local
 
@@ -24,3 +25,5 @@ pnpm-debug.log*
 
 #Electron-builder output
 /dist_electron
+
+/electron/smtpTransporter.js
