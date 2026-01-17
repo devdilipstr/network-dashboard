@@ -5,12 +5,13 @@
     "name": "Dilip Suthar",
     "email": "techartistdilip@gmail.com"
   },
-  "version": "1.0.2",
+  "version": "1.0.1",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "electron:build": "vue-cli-service electron:build",
+    "electron:publish": "vue-cli-service electron:build --publish always",
     "electron:serve": "vue-cli-service electron:serve",
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps"

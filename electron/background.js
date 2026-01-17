@@ -80,6 +80,7 @@ app.whenReady().then(async () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
   });
   if(!isDev){
+    autoUpdater.checkForUpdatesAndNotify();
     globalShortcut.register('Control+Shift+I', () => {
       return false; 
     });
@@ -90,12 +91,11 @@ app.whenReady().then(async () => {
 
   autoUpdater.on('update-downloaded', () => {
     win.webContents.send('update-downloaded');
-    autoUpdater.quitAndInstall();
   });
 });
 
 app.on('before-quit', () => {
-  autoUpdater.quitAndInstall(false, true)
+  autoUpdater.quitAndInstall(false, false)
 });
 
 app.on('window-all-closed', () => {
