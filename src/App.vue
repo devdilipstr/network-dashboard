@@ -19,7 +19,7 @@ const toastData =  ref({
   bg:""
 })
 const darkMode = ref(localStorage.getItem("darkMode") === "true")
-
+const version = ref("")
 const toggleDarkMode = () => {
   darkMode.value = !darkMode.value
   localStorage.setItem("darkMode",darkMode.value)
@@ -30,6 +30,7 @@ onBeforeMount(async () => {
     data.value = await useLocalStorage.getData()
     settings.value = await useLocalStorage.getSettings()
     selectedTopology.value = Object.keys(data.value)[0]
+    version.value = await ipcRenderer.invoke('get-app-version')
   } catch (error) {
     setToast("Error while fetching data","danger")
   }
@@ -106,7 +107,7 @@ watch(toastData,()=>{
   <div class="main-parent w-100 d-flex justify-content-center" :data-bs-theme="darkMode ? 'dark' : 'light'">
     <LogIn v-if="!islogged" @check-pass="checkPass" @view-only="viewOnly"/>
     <div v-else class="d-flex">    
-      <settingsSide v-if="settingsidestatus" :settings="settings" @closeSettings="closeSettings" @settoast="setToast"/>
+      <settingsSide v-if="settingsidestatus" :settings="settings" @closeSettings="closeSettings" @settoast="setToast" :version="version"/>
       <TopologySection v-else :data="data" @select-topology="selectTopology" @deleteTopology="deleteTopology" :viewonly="viewonly" @openSettings="openSettings"  @settoast="setToast" :isdarkmode="darkMode" @toggleDarkMode="toggleDarkMode"/>
       <space v-if="selectedTopology" :data="data" :topology="selectedTopology" :key="selectedTopology" :viewonly="viewonly" :settings="settings" @settoast="setToast"/>
       <h1 v-else class="d-flex align-items-center h-100 justify-content-center w-100">No Topologies or Not Selected</h1>

@@ -1,16 +1,10 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, globalShortcut } = require('electron');
 const path = require('path');
 const ping = require('ping');
-const nodemailer = require('nodemailer');
 const {autoUpdater} = require('electron-updater')
 const isDev = process.env.NODE_ENV !== 'production';
-// const { MongoClient } = require("mongodb");
-// const mongoURI = "mongodb+srv://atlas-sample-dataset-load-67e408f004ae7a42fc68a7f8:qhSbqwBNBKdo149v@nd.xkuhzrx.mongodb.net/?retryWrites=true&w=majority&appName=nd";
-// const client = new MongoClient(mongoURI);
-// let db;
-
-let win
 const transporter = require("./smtpTransporter");
+let win;
 function createWindow() {
   win = new BrowserWindow({
     width: 800,
@@ -73,7 +67,10 @@ ipcMain.handle('get-app-version', () => {
 
 ipcMain.handle('logout',()=>{
   if(win){
-    win.reload();  
+    win.loadURL(
+    isDev
+      ? 'http://localhost:8080'
+      : `file://${path.join(__dirname, '../dist/index.html')}`);
   }
 })
 

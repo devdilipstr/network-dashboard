@@ -2,7 +2,11 @@
     <div class="container d-flex flex-column align-items-start h-100  p-2 w-auto">
         <div class="d-flex w-100 justify-content-between align-items-center">
             <p class="h5 mt-2">Settings</p>
-            <button class="btn btn-close" @click="closeSettings"></button>
+            <div class="d-flex gap-1">
+                <span class="badge bg-primary center d-flex justify-content-center align-items-center" title="current version">{{version}}</span>
+                <!-- <button class="btn btn-info">{{version}}</button> -->
+                <button class="btn btn-close" @click="closeSettings"></button>
+            </div>
         </div>
         <div class="d-flex input-group mt-2">
             <input type="text" class="form-control danger" placeholder="Enter New Password" v-model="newpass" @keyup.enter="changepass">
@@ -39,7 +43,7 @@
 <script setup>
 import { defineEmits, defineProps, ref, watch } from 'vue'
 import useLocalStorage from './useLocalStorage'
-const p = defineProps(['settings'])
+const p = defineProps(['settings','version'])
 const newpass = ref("")
 const newmail = ref("")
 const packets = ref(p.settings['packets'])
