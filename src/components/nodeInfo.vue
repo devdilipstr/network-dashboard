@@ -6,11 +6,9 @@
                     <label class="form-check-label" for="flexSwitchCheckDefault">Auto Ping</label>
                 </div>
             <div class="d-flex justify-content-between">
-                <p class=" align-self-center m-0" title="Node ID" @click="copyNodeId(nodeId)">{{ nodeId }}</p>
-            <button class="btn btn-close" @click="closeinfo"></button>
-
-                <!-- <button class="btn btn-primary btn-sm m-1" @click="ping">Ping</button> -->
-              
+                <p class="input-group-text align-self-center m-0" style="cursor: pointer;" title="Node id: click to copy" @click="copyNodeId(nodeId)">{{ nodeId }}</p>
+                <button class="btn btn-close align-self-center mx-2" @click="closeinfo"></button>
+                 <!-- <button class="btn btn-primary btn-sm m-1" @click="ping">Ping</button> -->  
             </div>
         </div>
         <div class="input-group">
@@ -87,7 +85,7 @@ const connlist = ref({})
 const pingSwitch = ref(p.autoping)
 const connTypeRef  = ref()
 const detailref = ref()
-const emits = defineEmits(['closeinfo', 'deleteNode', 'updateNode', 'addTarget'])
+const emits = defineEmits(['closeinfo', 'deleteNode', 'updateNode', 'addTarget','settoast'])
 const closeinfo = () => {
     emits("closeinfo", true)
 }
@@ -123,9 +121,9 @@ const deleteConn = (id) => {
 const copyNodeId = (nodeId) => {
     try{
         navigator.clipboard.writeText(nodeId)
-        emits('settoast',"Node ID")  
+        emits('settoast',"Node id copied")  
     }catch(e){
-        emits('settoast',"Cipboard issue","danger")  ``
+        emits('settoast',"Cipboard issue","danger")
     }
 }
 

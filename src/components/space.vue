@@ -79,6 +79,7 @@
       :autoping="data[topology].autoping[nodeSelectInfo.nodeId]"
       :ping-data="pingData"
       :viewonly="p.viewonly"
+      @settoast="emittoast"
     />
     
   </div>
