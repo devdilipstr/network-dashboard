@@ -15,7 +15,7 @@
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps"
   },
-  "main": "electron/background.js",
+  "main": "background.js",
   "dependencies": {
     "@babel/preset-env": "^7.26.9",
     "@popperjs/core": "^2.11.8",

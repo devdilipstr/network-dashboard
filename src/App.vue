@@ -6,8 +6,7 @@ import useLocalStorage from "./components/useLocalStorage"
 import LogIn from "./components/logIn.vue"
 import settingsSide from "./components/settingsSide.vue"
 import ShowToast from "./components/showToast.vue"
-
-
+const ipcRenderer = window.require ? window.require('electron').ipcRenderer : null
 
 const data = ref({})
 const settings = ref({})
@@ -35,6 +34,14 @@ onBeforeMount(async () => {
     setToast("Error while fetching data","danger")
   }
 })
+
+ipcRenderer.on('update-available', () => {
+  setToast("Update Available! Downloading...")
+});
+
+ipcRenderer.on('update-downloaded', () => {
+  setToast("Update Downloaded! It will be installed on restart.")
+});
 
 const selectTopology = (id,name) => {
   selectedTopology.value = id

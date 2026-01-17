@@ -8,9 +8,11 @@ const isDev = process.env.NODE_ENV !== 'production';
 // const mongoURI = "mongodb+srv://atlas-sample-dataset-load-67e408f004ae7a42fc68a7f8:qhSbqwBNBKdo149v@nd.xkuhzrx.mongodb.net/?retryWrites=true&w=majority&appName=nd";
 // const client = new MongoClient(mongoURI);
 // let db;
+
+let win
 const transporter = require("./smtpTransporter");
 function createWindow() {
-  const win = new BrowserWindow({
+  win = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
@@ -69,46 +71,24 @@ ipcMain.handle('get-app-version', () => {
   return app.getVersion(); // Retrieve the current version of the app
 });
 
-// ipcMain.handle("fetch-data", async (event, collectionName) => {
-//   try {
-//     const collection = db.collection(collectionName);
-//     return await collection.find({}).toArray();
-//   } catch (err) {
-//     console.error("Error fetching data:", err);
-//     throw err;
-//   }
-// });
-
-// ipcMain.handle("insert-data", async (event, collectionName, data) => {
-//   try {
-//     const collection = db.collection(collectionName);
-//     return await collection.insertOne(data);
-//   } catch (err) {
-//     console.error("Error inserting data:", err);
-//     throw err;
-//   }
-// });
+ipcMain.handle('logout',()=>{
+  if(win){
+    win.reload();  
+  }
+})
 
 app.whenReady().then(async () => {
   createWindow();
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
   });
-  // try {
-  //   await client.connect(); // Connect to MongoDB
-  //   db = client.db("networkdash"); // Access the database
-  //   console.log("Connected to MongoDB");
-  // } catch (err) {
-  //   console.error("MongoDB connection error:", err);
-  // }
   if(!isDev){
     globalShortcut.register('Control+Shift+I', () => {
       return false; 
-  });
+    });
   }
   autoUpdater.on('update-available', () => {
-    log.
-    win.webContents.send('update-available');
+    win.webContents.send('update-available'); 
   });
 
   autoUpdater.on('update-downloaded', () => {

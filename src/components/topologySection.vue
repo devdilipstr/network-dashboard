@@ -4,8 +4,8 @@
             <div class="d-flex justify-content-between gap-3">
                 <p class="h5 mt-2">Topologies</p>
                 <div class="d-flex w-100">
-                <a href="./"><button class="d-flex justify-content-center align-items-center btn rounded-5" style="width: 40px; height: 40px;" title="Refresh/Logout"><img class="png-theme" :src="refreshicon" style="width: 20px;height: 20px;"/></button></a>
-                <button class="d-flex justify-content-center align-items-center btn rounded-5" style="width: 40px; height: 40px;" :title="updateinfo"><img class="png-theme" id="updateicon" :src="updateicon" style="width: 18px;height: 18px;"/></button>
+                <button class="d-flex justify-content-center align-items-center btn rounded-5" style="width: 40px; height: 40px;" title="Refresh/Logout" @click="logout"><img class="png-theme" :src="refreshicon" style="width: 20px;height: 20px;"/></button>
+                <!-- <button class="d-flex justify-content-center align-items-center btn rounded-5" style="width: 40px; height: 40px;" :title="updateinfo"><img class="png-theme" id="updateicon" :src="updateicon" style="width: 18px;height: 18px;"/></button> -->
                 <button class="d-flex justify-content-center align-items-center btn rounded-5" style="width: 40px; height: 40px;" :title="isdarkmode ? 'Light Mode' : 'Dark Mode'" @click="toggleDarkMode">
                     <img v-if="isdarkmode" class="png-theme" :src="lightModeIcon" id="updateicon" style="width: 18px;height: 18px;"/>
                     <img v-else class="png-theme" :src="darkModeIcon" id="updateicon" style="width: 18px;height: 18px;"/>
@@ -89,15 +89,11 @@
             emits('settoast',error + ":while clipboard","danger")   
         }
     }
-
         
-    ipcRenderer.on('update-available', () => {
-        updateinfo.value = "update available: downloading"
-    })
+    const logout= ()=>{
+        ipcRenderer.invoke('logout')
+    }
 
-    ipcRenderer.on('update-downloaded', () => {
-        updateinfo.value = "Update Downloaded: restart to install"
-    })
 </script>
 <style scoped>
     .container{
