@@ -202,7 +202,7 @@
         right: 0;  
     }
     .infocard{
-        background: #f2f2f2;
+        background-color: var(--bs-tertiary-bg);
         border-radius: 10px;
         margin-right: 5px
     }

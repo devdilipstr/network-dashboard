@@ -89,7 +89,7 @@ watch(toastData,()=>{
 </script>
 <template>
   <ShowToast v-if="toastData.text" :toastdata="toastData" :key="toastData.bg"/>
-  <div class="w-100  d-flex justify-content-center ">
+  <div class="main-parent w-100 d-flex justify-content-center" data-bs-theme="dark">
     <LogIn v-if="!islogged" @check-pass="checkPass" @view-only="viewOnly"/>
     <div v-else class="d-flex">    
       <settingsSide v-if="settingsidestatus" :settings="settings" @closeSettings="closeSettings" @settoast="setToast"/>
@@ -110,5 +110,9 @@ watch(toastData,()=>{
   div {
     height: 100vh;
     width: 100%;
+  }
+  .main-parent{
+    background-color: var(--bs-body-bg);
+    color: var(--bs-body-color);
   }
 </style>

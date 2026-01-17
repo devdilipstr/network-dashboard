@@ -3,16 +3,16 @@
         <div class="d-flex flex-column w-100">
             <div class="d-flex justify-content-between gap-3">
                 <p class="h5 mt-2">Topologies</p>
-                <div class="d-flex w-100 ">
-                <a href="/"><button class="d-flex justify-content-center align-items-center btn btn-outline-light rounded-5" style="width: 40px; height: 40px;" title="Refresh/Logout"><img :src="refreshicon" style="width: 20px;height: 20px;"/></button></a>
-                <button class="d-flex justify-content-center align-items-center btn btn-outline-light rounded-5" style="width: 40px; height: 40px;" :title="updateinfo"><img id="updateicon" :src="updateicon" style="width: 18px;height: 18px;"/></button>
-                <button v-if="!viewonly" class="d-flex justify-content-center align-items-center btn btn-outline-light rounded-5" style="width: 40px; height: 40px;" @click="openSettings" title="Settings"><img :src="settingicon" style="width: 20px;height: 20px;"/></button>
+                <div class="d-flex w-100 gap-2">
+                <a href="/"><button class="d-flex justify-content-center align-items-center btn rounded-5" style="width: 40px; height: 40px;" title="Refresh/Logout"><img class="png-theme" :src="refreshicon" style="width: 20px;height: 20px;"/></button></a>
+                <button class="d-flex justify-content-center align-items-center btn rounded-5" style="width: 40px; height: 40px;" :title="updateinfo"><img class="png-theme" id="updateicon" :src="updateicon" style="width: 18px;height: 18px;"/></button>
+                <button v-if="!viewonly" class="d-flex justify-content-center align-items-center btn rounded-5" style="width: 40px; height: 40px;" @click="openSettings" title="Settings"><img class="png-theme" :src="settingicon" style="width: 20px;height: 20px;"/></button>
             </div>
             </div>
         <div class="div mt-2"  v-if="data" >
             <div class="d-flex align-items-center justify-content-between" v-for="(t,id) in data" v-bind:key="id">
                 <span class="input-group-text w-100" style="cursor: pointer;" id="basic-addon1" @click="selectTopology(id,t.name)" title="Select Topology">{{t.name}}</span>
-                <button v-if="!viewonly" class="btn btn-sm p-2" @click="exportToplogy(id)" title="Export Topology"><img width="16px" height="16px" :src="exporticon"/></button>
+                <button v-if="!viewonly" class="btn btn-sm p-2" @click="exportToplogy(id)" title="Export Topology"><img class="png-theme" width="16px" height="16px" :src="exporticon"/></button>
                 <button v-if="!viewonly" class="btn btn-close btn-sm p-2" @click="deleteTopology(id,t.name)" title="Delete Topology"></button>
             </div>
         </div>
@@ -90,7 +90,13 @@
 </script>
 <style scoped>
     .container{
-        background-color: #f2f2f2;
+        background-color: var(--bs-tertiary-bg);
         padding: 0;
     }
-</style>
+    [data-bs-theme="light"] .png-theme{
+        filter: invert(0) brightness(0);
+    }
+    [data-bs-theme="dark"] .png-theme{
+        filter: invert(1) brightness(100%);
+    }
+</style>    

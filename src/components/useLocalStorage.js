@@ -37,30 +37,29 @@ const fetchcollection = async (collectionName) => {
 const conns = {
     1: {
         label: "ofc single fiber mode - module",
-        color: "#FFD700"
+        color: "#FFC107" // Bootstrap warning yellow
     },
     2: {
         label: "ofc single fiber mode - media convertor",
-        color: "#FFD700"
+        color: "#FFC107"
     },
     3: {
         label: "ofc multi mode mode - module",
-        color: "#0000FF"
+        color: "#20C997" // Bootstrap teal
     },
     4: {
         label: "ofc multi mode mode - module",
-        color: "#0000FF"
+        color: "#20C997"
     },
     5: {
         label: "utp",
-        color: "black"
+        color: "#343A40" // Bootstrap dark gray
     },
     6: {
         label: "wireless ap",
-        color: "grey"
+        color: "#6C757D" // Bootstrap secondary gray
     }
 }
-
 
 const defaultSetting = {
     adminpass: "12345678",
@@ -128,6 +127,7 @@ const saveData = async (data) => {
 const addConnection = (data, topology, source, target, connType) => {
     const id = uid.rnd()
     const newConn = { source: source, target: target, label: conns[connType].label, color: conns[connType].color }
+    if(data[topology]['connection'] == null) data[topology]['connection'] = {}
     data[topology]['connection'][id] = newConn
 }
 //delete connection 

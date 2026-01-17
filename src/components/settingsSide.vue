@@ -92,7 +92,7 @@ watch(p.settings, () => {
 </script>
 <style scoped>
 .container {
-    background-color: #f2f2f2;
+    background-color: var(--bs-tertiary-bg);
     padding: 0;
 }
 </style>

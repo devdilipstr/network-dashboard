@@ -29,11 +29,7 @@
         <div class="input-group">
             <select class="form-select" ref="typeref" :value="data[topology].nodes[nodeId].type">
                 <option selected>Select Type</option>
-                <option value="1">Internet</option>
-                <option value="2">Router</option>
-                <option value="3">PC</option>
-                <option value="4">Switch</option>
-                <option value="5">Server</option>
+                <option v-for="(type,index) in types" :key="index" :value="index+1">{{type}}</option>
             </select>
 
         </div>
@@ -53,7 +49,7 @@
                     <option value="5">utp</option>
                     <option value="6">wireless ap</option>
                 </select>
-                 <button class="btn btn-light btn-sm" @click="addTarget" title="Add Target Connection">Add</button>
+                 <button class="btn btn-secondary btn-sm" @click="addTarget" title="Add Target Connection">Add</button>
             </div>
         </div>
         <div class="div" v-if="connlist">
@@ -63,7 +59,7 @@
                 <!-- <span class="input-group-text" id="basic-addon1">{{data[topology].nodes[conn[target]]}}</span> -->
                 <span class="input-group-text w-100" id="basic-addon1">{{ conn.name || "-"}}</span>
                 <span class="input-group-text w-100" id="basic-addon1">{{ conn.ip || "-"}}</span>
-                <span class="input-group-text w-100" id="basic-addon1">{{ conn.type || "-" }}</span>
+                <span class="input-group-text w-100" id="basic-addon1">{{ types[conn.type-1] || "-" }}</span>
                 <button v-if="!p.viewonly" class="btn btn-close btn-sm p-3" @click="deleteConn(id)"></button>
             </div>
         </div>
@@ -87,6 +83,7 @@ const pingSwitch = ref(p.autoping)
 const connTypeRef  = ref()
 const detailref = ref()
 const emits = defineEmits(['closeinfo', 'deleteNode', 'updateNode', 'addTarget','settoast'])
+const types =  ['Internet','Router','PC','Switch','Server']
 const closeinfo = () => {
     emits("closeinfo", true)
 }
@@ -106,7 +103,7 @@ const deleteNode = () => {
 
 const addTarget = () => {
     emits('addTarget', target_id.value.value,connTypeRef.value.value)
-    if(!target_id.value.length==0){
+    if(!target_id.value.value.length==0){
         let addTarget = useLocalStorage.getNode(p.topology, target_id.value.value)
         connlist.value[target_id.value.value] = addTarget
         target_id.value.value = ""
@@ -154,7 +151,7 @@ watch(pingSwitch,()=>{
     left: 50%;
     width: fit-content;
     height: fit-content;
-    background-color: #f2f2f2;
+    background-color: var(--bs-tertiary-bg);
     transform: translateX(-50%);
     border-radius: 10px;
     padding: 15px;

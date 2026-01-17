@@ -37,7 +37,7 @@
             y="40"
             dominant-baseline="middle"
             text-anchor="middle"
-            fill="black"
+            fill="currentColor"
             :font-size="config.fontSize * 1 - 3"
             font-weight="bold"
           >
@@ -54,13 +54,13 @@
             y="-20"
             width="40"
             height="40"
-            fill="#f2f2f2"
+            fill="var(--bs-tertiary-bg)"
             rx="8"
             :stroke-width="config.strokeWidth"
             stroke="#f2f2f2"
             style="transition: all 0.2s ease-in-out"
           ></rect>
-          <image x="-10" y="-10" height="20" width="20" :href="typeLogo(nodeId)"/>
+          <image class="png-theme" x="-10" y="-10" height="20" width="20" :href="typeLogo(nodeId)"/>
         </g>
       </template>
       
@@ -158,7 +158,7 @@ const configs = defineConfigs({
       strokeColor: '#f2f2f2',
       color: 'f2f2f2',
       fill: '#f2f2f2',
-      strokeWidth: 3,
+      strokeWidth: 1,
       borderRadius: 8
     },
     normal: {
@@ -169,7 +169,7 @@ const configs = defineConfigs({
       height: 36
     },
     focusring: {
-      color: 'black',
+      color: 'var(--bs-primary)',
       width: 2,
       borderRadius: 8
     },
@@ -180,6 +180,9 @@ const configs = defineConfigs({
     }
   },
   edge: {
+    label:{
+      color:'currentColor',
+    },
     marker: {
       target: {
         type: "arrow",
@@ -327,7 +330,8 @@ onBeforeMount(() => {
 }
 
 .space {
-  background-color: white;
+  background-color: var(--bs-body-bg);
+  color: var(--bs-body-text);
   height: 100vh;
   width: 100vw;
   position: relative;
@@ -336,6 +340,12 @@ onBeforeMount(() => {
   animation: blink 1s infinite;
   font-size: 10px;  
 }
+  [data-bs-theme="light"] .png-theme{
+        filter: invert(0) brightness(0);
+    }
+    [data-bs-theme="dark"] .png-theme{
+        filter: invert(1) brightness(100%);
+    }
 @keyframes blink {
   0%,100%{
     opacity:1
