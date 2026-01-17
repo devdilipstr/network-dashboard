@@ -3,7 +3,7 @@
         <img class="align-self-center" src="https://i.ibb.co/chFJMR98/984d60630186e440e9c01655c3e50f1b.jpg" style="width: 150px;height: 100px;"/>
         <h5 class="align-self-center">Network Monitoring Tool</h5>
         <p class="h2 mb-3">Admin Login</p>
-        <div class="d-flex">
+        <div class="d-flex gap-1">
         <input type="text" class="form-control "  placeholder="Enter PassKey for Admin" v-model="pass" @keyup.enter="checkPass">
         <button class="btn btn-primary" @click="checkPass">login</button>
     </div>

@@ -35,31 +35,33 @@ const fetchcollection = async (collectionName) => {
 };
 //connection types
 const conns = {
-    1: {
-        label: "ofc single fiber mode - module",
-        color: "#FFC107" // Bootstrap warning yellow
-    },
-    2: {
-        label: "ofc single fiber mode - media convertor",
-        color: "#FFC107"
-    },
-    3: {
-        label: "ofc multi mode mode - module",
-        color: "#20C997" // Bootstrap teal
-    },
-    4: {
-        label: "ofc multi mode mode - module",
-        color: "#20C997"
-    },
-    5: {
-        label: "utp",
-        color: "#343A40" // Bootstrap dark gray
-    },
-    6: {
-        label: "wireless ap",
-        color: "#6C757D" // Bootstrap secondary gray
-    }
-}
+  1: {
+    label: "ofc single fiber mode - module",
+    color: "#FFC107" // Bootstrap warning yellow
+  },
+  2: {
+    label: "ofc single fiber mode - media convertor",
+    color: "#FFC107"
+  },
+  3: {
+    label: "ofc multi mode mode - module",
+    color: "#20C997" // Bootstrap teal
+  },
+  4: {
+    label: "ofc multi mode mode - module",
+    color: "#20C997"
+  },
+  5: {
+    label: "utp",
+    color: "#0d6efd" // Bootstrap primary blue (distinct from teal/yellow)
+  },
+  6: {
+    label: "wireless ap",
+    color: "#6610f2" // Bootstrap purple (distinct from gray/blue)
+  }
+};
+
+
 
 const defaultSetting = {
     adminpass: "12345678",

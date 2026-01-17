@@ -3,9 +3,13 @@
         <div class="d-flex flex-column w-100">
             <div class="d-flex justify-content-between gap-3">
                 <p class="h5 mt-2">Topologies</p>
-                <div class="d-flex w-100 gap-2">
-                <a href="/"><button class="d-flex justify-content-center align-items-center btn rounded-5" style="width: 40px; height: 40px;" title="Refresh/Logout"><img class="png-theme" :src="refreshicon" style="width: 20px;height: 20px;"/></button></a>
+                <div class="d-flex w-100">
+                <a href="./"><button class="d-flex justify-content-center align-items-center btn rounded-5" style="width: 40px; height: 40px;" title="Refresh/Logout"><img class="png-theme" :src="refreshicon" style="width: 20px;height: 20px;"/></button></a>
                 <button class="d-flex justify-content-center align-items-center btn rounded-5" style="width: 40px; height: 40px;" :title="updateinfo"><img class="png-theme" id="updateicon" :src="updateicon" style="width: 18px;height: 18px;"/></button>
+                <button class="d-flex justify-content-center align-items-center btn rounded-5" style="width: 40px; height: 40px;" :title="isdarkmode ? 'Light Mode' : 'Dark Mode'" @click="toggleDarkMode">
+                    <img v-if="isdarkmode" class="png-theme" :src="lightModeIcon" id="updateicon" style="width: 18px;height: 18px;"/>
+                    <img v-else class="png-theme" :src="darkModeIcon" id="updateicon" style="width: 18px;height: 18px;"/>
+                </button>
                 <button v-if="!viewonly" class="d-flex justify-content-center align-items-center btn rounded-5" style="width: 40px; height: 40px;" @click="openSettings" title="Settings"><img class="png-theme" :src="settingicon" style="width: 20px;height: 20px;"/></button>
             </div>
             </div>
@@ -31,6 +35,9 @@
     import exporticon from "../assets/export.png"
     import refreshicon from "../assets/refresh.png"
     import updateicon from "../assets/update.png"
+    import darkModeIcon from "../assets/dark_mode.png"
+    import lightModeIcon from "../assets/light_mode.png"
+
     const ipcRenderer = window.require ? window.require('electron').ipcRenderer : null
     const tName  = ref()
     const updateinfo = ref("latest" )
@@ -39,8 +46,8 @@
         updateinfo.value = "latest:" +version
     })
 
-    const p = defineProps(['data','viewonly'])
-    const emits = defineEmits(['selectTopology','deleteTopology','openSettings','settoast'])   
+    const p = defineProps(['data','viewonly','isdarkmode'])
+    const emits = defineEmits(['selectTopology','deleteTopology','openSettings','settoast','toggleDarkMode'])   
     
     const deleteTopology =(id,name)=>{
         emits('deleteTopology',id,name)
@@ -67,6 +74,10 @@
 
     const openSettings =() =>{
         emits('openSettings',true)
+    }
+
+    const toggleDarkMode =() =>{
+        emits('toggleDarkMode')
     }
 
     const exportToplogy = (id) =>{

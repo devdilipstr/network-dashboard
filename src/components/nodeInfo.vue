@@ -37,7 +37,7 @@
             <div class="input-group w-50">
                 <span class="input-group-text" id="basic-addon1">Target</span>
                 <input type="text" class="form-control" placeholder="Enter Target Node Id" aria-label="ip"
-                    aria-describedby="basic-addon1" ref="target_id">
+                    aria-describedby="basic-addon1" ref="target_id" @focus="getTargetId">
             </div>
             <div class="input-group w-50">
                 <select class="form-select" ref="connTypeRef">
@@ -123,6 +123,16 @@ const copyNodeId = (nodeId) => {
     }catch(e){
         emits('settoast',"Cipboard issue","danger")
     }
+}
+
+const getTargetId = () =>{
+    navigator.clipboard.readText()
+        .then(text => {
+            target_id.value.value = text
+        })
+        .catch(err => {
+            emits('settoast',"Failed to read clipboard contents: " + err,"danger")
+        });
 }
 
 const pingSwitchChanged= ()=>{

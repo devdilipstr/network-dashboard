@@ -137,9 +137,9 @@ const pingData = ref(Object.entries(p.data[p.topology]?.autoping || {}) // Add f
 
 const pingColor = (value) =>{
   if(value == 'Offline' || value== 'Error' || Number(value)>1000){
-    return 'red'
+    return '#ff4d4d'
   }else{
-    return 'green'
+    return '#00ff66'
   }
 }
 
@@ -197,6 +197,7 @@ const configs = defineConfigs({
       linecap: 'round',
     },
     hover: {
+
       color:(edge)=>edge.color||'black',
     }
   },
