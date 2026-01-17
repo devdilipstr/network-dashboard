@@ -89,8 +89,8 @@ app.whenReady().then(async () => {
   });
 
   autoUpdater.on('update-downloaded', () => {
-    console.log('Update downloaded!');
     win.webContents.send('update-downloaded');
+    autoUpdater.quitAndInstall();
   });
 });
 
